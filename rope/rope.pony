@@ -70,9 +70,9 @@ class val Rope is (_RopeSegment & Stringable)
     String iso^
   =>
     match source
-    | let s: Rope         => s._copy_into_string(consume dest)
-    | let s: RopeNone     => consume dest
-    else                     dest.append(source); consume dest
+    | let s: Rope     => s._copy_into_string(consume dest)
+    | let s: RopeNone => consume dest
+    else                 dest.append(source); consume dest
     end
   
   fun string(fmt: FormatSettings = FormatSettingsDefault): String iso^ =>

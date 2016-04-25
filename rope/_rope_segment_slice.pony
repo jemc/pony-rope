@@ -9,8 +9,8 @@ class val _RopeSegmentSlice is _RopeSegment
   fun slice(i: USize, j: USize): Rope =>
     Rope(_RopeSegmentSlice(array, start + i, (start + j).min(finish)))
   
-  fun size(): USize                   => finish - start
-  fun apply(i: USize): U8?            => array(start + i)
+  fun size(): USize          => finish - start
+  fun apply(i: USize): U8?   => array(start + i)
   fun values(): Iterator[U8] =>
     object is Iterator[U8]
       let slice: _RopeSegmentSlice box = this
