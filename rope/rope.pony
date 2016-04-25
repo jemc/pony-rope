@@ -3,11 +3,15 @@ class val Rope is (_RopeSegment & Stringable)
   let _left:  _RopeSegment
   let _right: _RopeSegment
   let _weight: USize
+  let _depth:  USize
   
   new val create(l: _RopeSegment = RopeNone, r: _RopeSegment = RopeNone) =>
-    _left = l
-    _right = r
+    _left   = l
+    _right  = r
     _weight = l.size()
+    _depth  = 1 +
+      try (l as Rope)._depth else 0 end +
+      try (r as Rope)._depth else 0 end
   
   fun size(): USize =>
     _weight + _right.size()
