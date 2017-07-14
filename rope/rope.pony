@@ -71,7 +71,7 @@ class val Rope is (_RopeSegment & Stringable)
     else                 dest.append(source); consume dest
     end
   
-  fun string(fmt: FormatSettings = FormatSettingsDefault): String iso^ =>
+  fun string(): String iso^ =>
     let len = size()
     let out = recover iso String(len) end
     _copy_into_string(consume out)
