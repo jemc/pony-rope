@@ -14,8 +14,8 @@ class val Rope is (_RopeSegment & Stringable)
   
   fun apply(i: USize): U8? =>
     if _weight <= i
-    then _right(i - _weight)
-    else _left(i)
+    then _right(i - _weight)?
+    else _left(i)?
     end
   
   fun slice(i: USize, j: USize): Rope =>
@@ -43,8 +43,8 @@ class val Rope is (_RopeSegment & Stringable)
       let _right_values: Iterator[U8] = _right.values()
       fun ref has_next(): Bool => _left_values.has_next()
                                or _right_values.has_next()
-      fun ref next(): U8?      => try _left_values.next()
-                                 else _right_values.next() end
+      fun ref next(): U8?      => try _left_values.next()?
+                                 else _right_values.next()? end
     end
   
   fun val add(that: _RopeSegment): Rope =>
