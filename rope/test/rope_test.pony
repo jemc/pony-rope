@@ -52,6 +52,8 @@ class RopeDropTest is UnitTest
     h.assert_eq[USize](0, rope.drop(12).size())
     h.assert_eq[String]("", rope.drop(12).string())
 
+    h.assert_eq[String]("efghijkl", rope.drop(2).drop(2).string())
+
 class RopeTakeTest is UnitTest
   fun name(): String => "Rope/take"
 
@@ -96,8 +98,11 @@ class RopeFindTest is UnitTest
     assert_found_at(2, rope.find("cd"), h)
 
     rope = rope.drop(2) + "fg" + "hijkl"
+    h.assert_eq[String]("cdefghijkl", rope.string())
 
     assert_found_at(6, rope.find("ijk"), h)
+    assert_found_at(0, rope.drop(rope.find("ijk")._2).find("ijk"), h)
+
     assert_not_found(rope.find("abc"), h)
     assert_found_at(0, rope.find(rope), h)
     assert_found_at(2, rope.find(rope.drop(2)), h)
