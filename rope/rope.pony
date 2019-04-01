@@ -78,7 +78,18 @@ class val Rope is (_RopeSegment & Stringable)
 
   fun find(sub: _RopeSegment): (Bool, USize) =>
     """
-    TODO
+    Try to find `sub` in this rope.
+
+    If found, returns a tuple with the first element being `true` and the second element
+    being the starting index of `sub` in this.
+
+    ```pony
+    let rope = Rope + "abc" + "def"
+    match rope.find("cd")
+    | (true, let cd_index: USize) => "found"
+    | (false, _) => "not found"
+    end
+    ```
     """
     var i = USize(0)
     let this_size = size()
@@ -108,8 +119,14 @@ class val Rope is (_RopeSegment & Stringable)
     (false, USize(0))
 
   fun drop(amount: USize): Rope =>
+    """
+    Drop the first `amount` elements and return the rest as a new Rope.
+    """
     slice(amount, size())
 
   fun take(amount: USize): Rope =>
+    """
+    Take the first `amount` elements and return them as a new Rope, dropping the rest.
+    """
     slice(0, amount)
 
